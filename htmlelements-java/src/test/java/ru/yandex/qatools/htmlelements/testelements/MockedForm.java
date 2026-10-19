@@ -59,6 +59,8 @@ public class MockedForm extends Form {
         WebElement textInput = mockInputWithNameAndType(name, "text");
         when(getWrappedElement().findElements(By.name(name))).thenReturn(singletonList(textInput));
         when(textInput.getAttribute("value")).thenReturn(text);
+        // Selenium 4 uses the W3C DOM property for the entered value.
+        when(textInput.getDomProperty("value")).thenReturn(text);
         return textInput;
     }
 
@@ -84,9 +86,13 @@ public class MockedForm extends Form {
         WebElement selectOption = mock(WebElement.class);
         when(select.getTagName()).thenReturn("select");
         when(select.getAttribute("name")).thenReturn(SELECT_NAME);
+        // Selenium 4 Select.assertSelectIsEnabled validates that the <select> is enabled.
+        when(select.isEnabled()).thenReturn(true);
         when(getWrappedElement().findElements(By.name(SELECT_NAME))).thenReturn(singletonList(select));
         when(select.findElements(By.xpath(String.format(".//option[@value = \"%s\"]", SELECT_OPTION_VALUE)))).
                 thenReturn(singletonList(selectOption));
+        // Selenium 4 Select.setSelected validates that the option is enabled.
+        when(selectOption.isEnabled()).thenReturn(true);
         return selectOption;
     }
 

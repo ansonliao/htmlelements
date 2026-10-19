@@ -1,15 +1,12 @@
 package ru.yandex.qatools.htmlelements.utils;
 
-import com.google.common.collect.Lists;
 import org.apache.commons.lang3.text.WordUtils;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
-import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
 import java.lang.reflect.*;
 import java.net.URL;
@@ -31,9 +28,12 @@ public final class HtmlElementUtils {
     public static <T> T newInstance(Class<T> clazz, Object... args) throws IllegalAccessException,
             InstantiationException, NoSuchMethodException, InvocationTargetException {
         if (clazz.isMemberClass() && !Modifier.isStatic(clazz.getModifiers())) {
-            Class outerClass = clazz.getDeclaringClass();
-            Object outerObject = outerClass.newInstance();
-            return invokeConstructor(clazz, Lists.asList(outerObject, args).toArray());
+            Class<?> outerClass = clazz.getDeclaringClass();
+            Object outerObject = outerClass.getDeclaredConstructor().newInstance();
+            Object[] constructorArgs = new Object[args.length + 1];
+            constructorArgs[0] = outerObject;
+            System.arraycopy(args, 0, constructorArgs, 1, args.length);
+            return invokeConstructor(clazz, constructorArgs);
         }
         return invokeConstructor(clazz, args);
     }
@@ -145,20 +145,9 @@ public final class HtmlElementUtils {
         }
 
         // Since subclasses of RemoteWebElement were finally removed in Selenium 2.26.0, WebElements on local drivers
-        // are also instances of RemoteWebElement class. The only way that we found at the current moment to find out
-        // whether WebElement instance is on remote driver is to check the class of RemoteWebElement "parent" filed,
-        // which contains WebDriver instance to which this RemoteWebElement belongs.
-        // As this field has protected access this is done by reflection.
-        // TODO It's is a kind of a dirty hack to be improved in future versions.
-        RemoteWebElement remoteWebElement = (RemoteWebElement) element;
-        try {
-            Field elementParentFiled = RemoteWebElement.class.getDeclaredField("parent");
-            elementParentFiled.setAccessible(true);
-            WebDriver elementParent = (WebDriver) elementParentFiled.get(remoteWebElement);
-            return elementParent.getClass().equals(RemoteWebDriver.class);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new HtmlElementsException("Unable to find out if WebElement is on remote driver", e);
-        }
+        // are also instances of RemoteWebElement class. The only reliable way to tell whether a WebElement belongs
+        // to a remote driver is to inspect the driver it wraps.
+        return ((RemoteWebElement) element).getWrappedDriver().getClass().equals(RemoteWebDriver.class);
     }
 
     public static boolean existsInClasspath(final String fileName) {

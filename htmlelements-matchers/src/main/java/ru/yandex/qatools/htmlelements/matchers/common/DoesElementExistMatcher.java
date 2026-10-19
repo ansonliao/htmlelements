@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.By;
@@ -43,7 +42,6 @@ public class DoesElementExistMatcher extends TypeSafeMatcher<WebElement> {
     /**
      * Creates matcher that checks if element currently exists on page.
      */
-    @Factory
     public static Matcher<WebElement> exists() {
         return new DoesElementExistMatcher();
     }

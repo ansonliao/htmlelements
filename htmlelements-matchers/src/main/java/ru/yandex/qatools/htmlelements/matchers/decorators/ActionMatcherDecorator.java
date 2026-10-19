@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.decorators;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -35,7 +34,6 @@ public class ActionMatcherDecorator<T> extends TypeSafeMatcher<T> {
         mismatchDescription.appendText(" after ").appendDescriptionOf(action);
     }
 
-    @Factory
     public static <T> Matcher<T> decorateMatcherWithAction(final Matcher<? super T> matcher, final Action action) {
         return new ActionMatcherDecorator<>(matcher, action);
     }

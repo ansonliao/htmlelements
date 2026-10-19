@@ -1,8 +1,8 @@
 package ru.yandex.qatools.htmlelements.loader.decorator;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.Locatable;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.interactions.Locatable;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 

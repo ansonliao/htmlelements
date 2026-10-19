@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
 import ru.yandex.qatools.htmlelements.element.CheckBox;
 
@@ -29,7 +28,6 @@ public class IsCheckBoxSelectedMatcher extends TypeSafeMatcher<CheckBox> {
     /**
      * Creates matcher that tests if {@link CheckBox} is checked.
      */
-    @Factory
     public static IsCheckBoxSelectedMatcher isSelected() {
         return new IsCheckBoxSelectedMatcher();
     }

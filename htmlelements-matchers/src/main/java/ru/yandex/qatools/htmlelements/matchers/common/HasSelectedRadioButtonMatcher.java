@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
@@ -51,7 +50,6 @@ public class HasSelectedRadioButtonMatcher extends TypeSafeMatcher<Radio> {
      *
      * @param buttonMatcher Matcher to match selected radio button with.
      */
-    @Factory
     public static Matcher<Radio> hasSelectedRadioButton(final Matcher<WebElement> buttonMatcher) {
         return new HasSelectedRadioButtonMatcher(buttonMatcher);
     }

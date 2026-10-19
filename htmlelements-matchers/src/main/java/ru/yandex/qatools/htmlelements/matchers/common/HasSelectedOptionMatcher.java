@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
@@ -51,7 +50,6 @@ public class HasSelectedOptionMatcher extends TypeSafeMatcher<Select> {
      *
      * @param optionMatcher Matcher to match selected option with.
      */
-    @Factory
     public static Matcher<Select> hasSelectedOption(final Matcher<WebElement> optionMatcher) {
         return new HasSelectedOptionMatcher(optionMatcher);
     }

@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.decorators;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -16,7 +15,6 @@ import static ru.yandex.qatools.htmlelements.matchers.decorators.WaiterMatcherDe
 public class MatcherDecoratorsBuilder<T> extends TypeSafeMatcher<T> {
     private Matcher<? super T> matcher;
 
-    @Factory
     public static <T> MatcherDecoratorsBuilder<T> should(final Matcher<? super T> matcher) {
         return new MatcherDecoratorsBuilder<>(matcher);
     }

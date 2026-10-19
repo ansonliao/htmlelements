@@ -1,0 +1,15 @@
+[versions]
+selenium = "4.51.0"
+serenity = "5.4.1"
+commons-lang3 = "3.21.0"
+junit = "4.13.2"
+mockito = "5.24.0"
+hamcrest = "2.2"
+
+[libraries]
+selenium-java = { module = "org.seleniumhq.selenium:selenium-java", version.ref = "selenium" }
+serenity-core = { module = "net.serenity-bdd:serenity-core", version.ref = "serenity" }
+commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
+junit = { module = "junit:junit", version.ref = "junit" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "hamcrest" }

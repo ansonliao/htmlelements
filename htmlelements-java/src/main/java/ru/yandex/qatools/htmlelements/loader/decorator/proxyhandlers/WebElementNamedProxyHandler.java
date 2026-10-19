@@ -3,8 +3,6 @@ package ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
-import org.openqa.selenium.support.ui.Clock;
-import org.openqa.selenium.support.ui.SystemClock;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
@@ -19,14 +17,11 @@ public class WebElementNamedProxyHandler extends LocatingElementHandler {
 
     private final long timeOutInSeconds;
 
-    private final Clock clock;
-
     private final String name;
 
     public WebElementNamedProxyHandler(ElementLocator locator, String name) {
         super(locator);
         this.name = name;
-        this.clock = new SystemClock();
         this.timeOutInSeconds = Integer.getInteger("webdriver.timeouts.implicitlywait", DEFAULT_TIMEOUT);
     }
 
@@ -36,18 +31,20 @@ public class WebElementNamedProxyHandler extends LocatingElementHandler {
             return name;
         }
 
-        long end = this.clock.laterBy(TimeUnit.SECONDS.toMillis(this.timeOutInSeconds));
+        long end = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(this.timeOutInSeconds);
 
-        StaleElementReferenceException lasException = null;
-        while (this.clock.isNowBefore(end)) {
+        StaleElementReferenceException lastException = null;
+        do {
             try {
                 return super.invoke(o, method, objects);
             } catch (StaleElementReferenceException e) {
-                lasException = e;
-                this.waitFor();
+                lastException = e;
+                if (System.currentTimeMillis() < end) {
+                    this.waitFor();
+                }
             }
-        }
-        throw lasException;
+        } while (System.currentTimeMillis() < end);
+        throw lastException;
     }
 
     protected long sleepFor() {

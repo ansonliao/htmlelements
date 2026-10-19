@@ -1,63 +1,72 @@
 Html Elements framework
 =======================
-[![release](http://github-release-version.herokuapp.com/github/yandex-qatools/htmlelements/release.svg?style=flat)]
-(https://github.com/yandex-qatools/htmlelements/releases/latest)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ru.yandex.qatools.htmlelements/htmlelements-java/badge.svg?style=flat)]
-(https://maven-badges.herokuapp.com/maven-central/ru.yandex.qatools.htmlelements/htmlelements-java)
 
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![Java](https://img.shields.io/badge/java-21-blue.svg)](https://adoptium.net/)
+[![Selenium](https://img.shields.io/badge/selenium-4.x-green.svg)](https://www.selenium.dev/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.ansonliao/htmlelements-java.svg)](https://central.sonatype.com/artifact/io.github.ansonliao/htmlelements-java)
+
+> **Fork notice**
+>
+> This is an unofficial fork of [HtmlElements](https://github.com/yandex-qatools/htmlelements),
+> originally developed at Yandex and licensed under the Apache License, Version 2.0.
+> It is **not affiliated with, sponsored by, or endorsed by Yandex**.
+> The original copyright notice is retained in [LICENCE](LICENCE); see [NOTICE](NOTICE)
+> for the list of changes made in this fork.
+>
+> This fork is maintained at <https://github.com/ansonliao/htmlelements> and published
+> under the Maven coordinates `io.github.ansonliao`. The Java package names are kept
+> unchanged from upstream (`ru.yandex.qatools.htmlelements`) to preserve source
+> compatibility.
 
 This framework is designed to provide an easy-to-use way of interacting with web-page elements in your tests.
 It can be considered to be an extension of WebDriver Page Object.
 
-With the help of the Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction within them 
-and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements 
-and blocks. See [JavaDocs]
-(https://oss.sonatype.org/service/local/repositories/releases/archive/ru/yandex/qatools/htmlelements/htmlelements-java/1.16/htmlelements-java-1.16-javadoc.jar/!/index.html) 
-and [Samples](https://github.com/yandex-qatools/htmlelements-examples) for more details.
+With the help of the Html Elements framework you can group web-page elements into blocks, encapsulate logic of interaction within them
+and then easily use created blocks in page objects. It also provides a set of helpful matchers to use with web-page elements
+and blocks.
 
-You can ask your questions on StackOverflow with the [![htmlelements]
-(https://img.shields.io/badge/stackoverflow-htmlelements-orange.svg?style=flat)]
-(http://stackoverflow.com/questions/tagged/htmlelements) tag.
+Modules
+-------
 
-Other Languages
--------------
-In case you are not a Java guy/gal, don't panic, there are still few options:
+| Module | Description |
+|---|---|
+| `htmlelements-java` | Core: element types, block loader, page factory decorator |
+| `htmlelements-matchers` | Hamcrest matchers and matcher decorators |
+| `htmlelements-thucydides` | [Serenity BDD](https://serenity-bdd.info/) (formerly Thucydides) integration |
+| `htmlelements-all` | Convenience aggregator that pulls in all of the above |
 
-* [Html Elements .NET implementation](https://github.com/yandex-qatools/htmlelements-dotnet) - .NET port made by [Vadzim Hushchanskou](https://github.com/HardNorth)
-* [Html Elements PHP implementation](https://github.com/qa-tools/qa-tools) - PHP port made by [Alexander Obuhovich](https://github.com/aik099)
-* [bumblebee framework (C#)](https://github.com/patrickherrmann/Bumblebee) - same idea, nice implementation
+Build from source
+-----------------
 
-Release Notes
--------------
-* [Version 1.17 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.17)
-* [Version 1.16 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.16)
-* [Version 1.15 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.15)
-* [Version 1.14 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.14)
-* [Version 1.13 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.13)
-* [Version 1.12 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.12)
-* [Version 1.11 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.11-releasenotes.ru.md)
-* [Version 1.10 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.10-releasenotes.ru.md)
-* [Version 1.9 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.9-releasenotes.ru.md)
+Requires JDK 21 and Gradle 9.x (a wrapper is included, no local Gradle installation needed).
+
+```bash
+./gradlew build          # compile, test and package
+./gradlew test           # run tests only
+./gradlew publishToMavenLocal   # publish 2.0.0-SNAPSHOT to ~/.m2
+```
 
 Include Html Elements in your project
 -------------------------------------
+
 Maven dependencies for Html Elements core:
 
 ```xml
 <dependency>
-    <groupId>ru.yandex.qatools.htmlelements</groupId>
+    <groupId>io.github.ansonliao</groupId>
     <artifactId>htmlelements-java</artifactId>
-    <version>1.17</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
-And for Thucydides integration:
+And for Serenity BDD integration:
 
 ```xml
 <dependency>
-    <groupId>ru.yandex.qatools.htmlelements</groupId>
+    <groupId>io.github.ansonliao</groupId>
     <artifactId>htmlelements-thucydides</artifactId>
-    <version>1.17</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
@@ -65,13 +74,26 @@ Or you can include all modules at once if needed:
 
 ```xml
 <dependency>
-    <groupId>ru.yandex.qatools.htmlelements</groupId>
+    <groupId>io.github.ansonliao</groupId>
     <artifactId>htmlelements-all</artifactId>
-    <version>1.17</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
-Since 1.15 Java 8 is required. Please use 1.14 for Java 7 support.
+Gradle equivalent:
+
+```kotlin
+dependencies {
+    implementation("io.github.ansonliao:htmlelements-java:2.0.0")
+}
+```
+
+**Requirements:** Java 21 and Selenium 4.x.
+
+> Migrating from the upstream `ru.yandex.qatools.htmlelements` coordinates?
+> Change the `groupId` to `io.github.ansonliao`, bump the version to `2.0.0`, and
+> switch to Selenium 4.x. Java package names and public class names are unchanged.
+> See the [2.0.0 release notes](releasenotes/2.0.0-releasenotes.en.md) for behaviour changes.
 
 Create blocks of elements
 -------------------------
@@ -126,17 +148,17 @@ Created page objects can be used in your tests. This makes tests more concise, e
 ```java
 public class SampleTest {
 
-    private WebDriver driver = new FirefoxDriver();
+    private WebDriver driver = new ChromeDriver();
     private SearchPage searchPage = new SearchPage(driver);
 
     @Before
     public void loadPage() {
-        driver.get("http://www.yandex.com");
+        driver.get("https://www.google.com");
     }
 
     @Test
     public void sampleTest() {
-        searchPage.search("yandex");
+        searchPage.search("selenium");
         // Some assertion here
     }
 
@@ -147,7 +169,35 @@ public class SampleTest {
 }
 ```
 
+Other Languages
+-------------
+In case you are not a Java guy/gal, don't panic, there are still few options:
+
+* [Html Elements .NET implementation](https://github.com/yandex-qatools/htmlelements-dotnet) - .NET port made by [Vadzim Hushchanskou](https://github.com/HardNorth)
+* [Html Elements PHP implementation](https://github.com/qa-tools/qa-tools) - PHP port made by [Alexander Obuhovich](https://github.com/aik099)
+* [bumblebee framework (C#)](https://github.com/patrickherrmann/Bumblebee) - same idea, nice implementation
+
+Release Notes
+-------------
+* [Version 2.0.0 Release Notes](releasenotes/2.0.0-releasenotes.en.md) — Selenium 4, Java 21, Gradle, new coordinates
+* [Version 1.17 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.17)
+* [Version 1.16 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.16)
+* [Version 1.15 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.15)
+* [Version 1.14 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.14)
+* [Version 1.13 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.13)
+* [Version 1.12 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.12)
+* [Version 1.11 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.11-releasenotes.ru.md)
+* [Version 1.10 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.10-releasenotes.ru.md)
+* [Version 1.9 Release Notes](https://github.com/yandex-qatools/htmlelements/blob/master/releasenotes/1.9-releasenotes.ru.md)
+
+License
+-------
+Licensed under the [Apache License, Version 2.0](LICENSE).
+
+Original work: Copyright 2012 YANDEX. Modifications: Copyright 2026 ansonliao.
+See [NOTICE](NOTICE) for attribution and the list of changes.
+
 Questions?
 ----------
-In case you can't find an answer in documentation and examples provided above, you can ask it on StackOverflow with the 
+In case you can't find an answer in documentation and examples provided above, you can ask it on StackOverflow with the
 [![htmlelements](https://img.shields.io/badge/stackoverflow-htmlelements-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/htmlelements) tag.

@@ -1,0 +1,23 @@
+HtmlElements
+Copyright 2012 YANDEX
+
+This product is a fork of HtmlElements, originally developed at Yandex
+(https://github.com/yandex-qatools/htmlelements) and licensed under the
+Apache License, Version 2.0.
+
+Modifications Copyright 2026 ansonliao.
+
+Changes made in this fork:
+  - Republished under the Maven coordinates io.github.ansonliao.
+  - Build migrated from Apache Maven to Gradle.
+  - Upgraded from Selenium 2.x to Selenium 4.x and from Java 8 to Java 21.
+  - Thucydides integration migrated to Serenity BDD.
+  - Removed the abandoned PhantomJS driver dependency and build plugin.
+  - Corrected value lookup in TextInput#getText() for W3C WebDriver semantics.
+
+The Java package names (ru.yandex.qatools.htmlelements) are retained unchanged
+from the original work to preserve source compatibility. They identify the
+origin of the code and do not imply any affiliation with or endorsement by
+Yandex.
+
+This fork is not affiliated with, sponsored by, or endorsed by Yandex.

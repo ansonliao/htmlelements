@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
@@ -39,12 +38,10 @@ public class HasTextMatcher extends TypeSafeMatcher<WebElement> {
                 appendValue(item.getText());
     }
 
-    @Factory
     public static Matcher<WebElement> hasText(final Matcher<String> textMatcher) {
         return new HasTextMatcher(textMatcher);
     }
 
-    @Factory
     public static Matcher<WebElement> hasText(final String text) {
         return new HasTextMatcher(is(text));
     }

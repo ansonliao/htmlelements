@@ -46,7 +46,6 @@ public class ConditionMatcherDecorator<T, E> extends TypeSafeMatcher<T> {
         matcher.describeMismatch(item, mismatchDescription);
     }
 
-    @Factory
     public static <T, E> Matcher<T> decorateMatcherWithCondition(final Matcher<? super T> matcher,
                                                                  final E itemToMatchCondition,
                                                                  final Matcher<? super E> condition) {

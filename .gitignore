@@ -1,5 +1,6 @@
-target
+build/
+target/
+.gradle/
+.idea/
 *.iml
-.idea
-.*
-*/bin/*
+.DS_Store

@@ -1,11 +1,10 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 
 /**
  * This matcher allows you to use {@link WebElement} matchers with objects implementing {@link WrapsElement} interface.
@@ -41,7 +40,6 @@ public class WrapsElementMatcher extends TypeSafeMatcher<WrapsElement> {
      *
      * @param matcher Matcher to match wrapped element with.
      */
-    @Factory
     public static Matcher<WrapsElement> element(final Matcher<WebElement> matcher) {
         return new WrapsElementMatcher(matcher);
     }

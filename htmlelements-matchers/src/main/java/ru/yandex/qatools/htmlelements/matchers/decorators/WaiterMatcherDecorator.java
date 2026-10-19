@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.decorators;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -48,7 +47,6 @@ public class WaiterMatcherDecorator<T> extends TypeSafeMatcher<T> {
         mismatchDescription.appendText(" while waiting for ").appendDescriptionOf(waiter);
     }
 
-    @Factory
     public static <T> Matcher<T> decorateMatcherWithWaiter(final Matcher<? super T> matcher, final Waiter waiter) {
         return new WaiterMatcherDecorator<>(matcher, waiter);
     }

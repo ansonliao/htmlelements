@@ -36,17 +36,17 @@ public class HtmlElementFieldAnnotationsHandler extends Annotations {
     private By buildByFromFindAnnotations() {
         if (getField().isAnnotationPresent(FindBys.class)) {
             FindBys findBys = getField().getAnnotation(FindBys.class);
-            return buildByFromFindBys(findBys);
+            return new FindBys.FindByBuilder().buildIt(findBys, getField());
         }
 
         if (getField().isAnnotationPresent(FindAll.class)) {
-            FindAll findBys = getField().getAnnotation(FindAll.class);
-            return buildBysFromFindByOneOf(findBys);
+            FindAll findAll = getField().getAnnotation(FindAll.class);
+            return new FindAll.FindByBuilder().buildIt(findAll, getField());
         }
 
         if (getField().isAnnotationPresent(FindBy.class)) {
             FindBy findBy = getField().getAnnotation(FindBy.class);
-            return buildByFromFindBy(findBy);
+            return new FindBy.FindByBuilder().buildIt(findBy, getField());
         }
         return null;
     }
@@ -62,7 +62,7 @@ public class HtmlElementFieldAnnotationsHandler extends Annotations {
         Class<?> fieldClass = getField().getType();
         while (fieldClass != Object.class) {
             if (fieldClass.isAnnotationPresent(FindBy.class)) {
-                return buildByFromFindBy(fieldClass.getAnnotation(FindBy.class));
+                return new FindBy.FindByBuilder().buildIt(fieldClass.getAnnotation(FindBy.class), getField());
             }
             fieldClass = fieldClass.getSuperclass();
         }
@@ -81,7 +81,7 @@ public class HtmlElementFieldAnnotationsHandler extends Annotations {
         Class<?> listParameterClass = getGenericParameterClass(getField());
         while (listParameterClass != Object.class) {
             if (listParameterClass.isAnnotationPresent(FindBy.class)) {
-                return buildByFromFindBy(listParameterClass.getAnnotation(FindBy.class));
+                return new FindBy.FindByBuilder().buildIt(listParameterClass.getAnnotation(FindBy.class), getField());
             }
             listParameterClass = listParameterClass.getSuperclass();
         }

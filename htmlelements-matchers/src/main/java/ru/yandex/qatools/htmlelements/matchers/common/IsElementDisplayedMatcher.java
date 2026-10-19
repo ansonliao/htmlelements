@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebDriverException;
@@ -36,7 +35,6 @@ public class IsElementDisplayedMatcher extends TypeSafeMatcher<WebElement> {
     /**
      * Creates matcher that checks if element is currently displayed on page.
      */
-    @Factory
     public static Matcher<WebElement> isDisplayed() {
         return new IsElementDisplayedMatcher();
     }

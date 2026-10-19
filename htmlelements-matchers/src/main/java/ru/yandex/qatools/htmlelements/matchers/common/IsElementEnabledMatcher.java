@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
@@ -31,7 +30,6 @@ public class IsElementEnabledMatcher extends TypeSafeMatcher<WebElement> {
     /**
      * Creates matcher that checks if element is currently enabled.
      */
-    @Factory
     public static Matcher<WebElement> isEnabled() {
         return new IsElementEnabledMatcher();
     }

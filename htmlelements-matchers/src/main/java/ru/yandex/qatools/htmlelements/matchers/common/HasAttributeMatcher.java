@@ -1,7 +1,6 @@
 package ru.yandex.qatools.htmlelements.matchers.common;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.WebElement;
@@ -45,13 +44,11 @@ public class HasAttributeMatcher extends TypeSafeMatcher<WebElement> {
                 appendValue(item.getAttribute(attributeName));
     }
 
-    @Factory
     public static Matcher<WebElement> hasAttribute(final String attributeName,
                                                    final Matcher<String> attributeValueMatcher) {
         return new HasAttributeMatcher(attributeName, attributeValueMatcher);
     }
 
-    @Factory
     public static Matcher<WebElement> hasAttribute(final String attributeName, final String attributeValue) {
         return new HasAttributeMatcher(attributeName, is(attributeValue));
     }
