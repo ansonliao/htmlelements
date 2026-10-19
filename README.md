@@ -11,7 +11,7 @@ Html Elements framework
 > This is an unofficial fork of [HtmlElements](https://github.com/yandex-qatools/htmlelements),
 > originally developed at Yandex and licensed under the Apache License, Version 2.0.
 > It is **not affiliated with, sponsored by, or endorsed by Yandex**.
-> The original copyright notice is retained in [LICENCE](LICENCE); see [NOTICE](NOTICE)
+> The original copyright notice is retained in [LICENSE](LICENSE); see [NOTICE](NOTICE)
 > for the list of changes made in this fork.
 >
 > This fork is maintained at <https://github.com/ansonliao/htmlelements> and published
@@ -94,6 +94,29 @@ dependencies {
 > Change the `groupId` to `io.github.ansonliao`, bump the version to `2.0.0`, and
 > switch to Selenium 4.x. Java package names and public class names are unchanged.
 > See the [2.0.0 release notes](releasenotes/2.0.0-releasenotes.en.md) for behaviour changes.
+
+Tips
+----
+
+* **Fork source.** This is an independent, unofficial fork of
+  [yandex-qatools/htmlelements](https://github.com/yandex-qatools/htmlelements),
+  originally developed at Yandex and licensed under the Apache License, Version 2.0.
+  It is **not affiliated with, sponsored by, or endorsed by Yandex**. The original
+  copyright is retained and the list of changes is documented in [NOTICE](NOTICE).
+* **Java package names are unchanged.** Import paths stay
+  `ru.yandex.qatools.htmlelements.*` so existing code keeps compiling; only the
+  Maven `groupId` changed to `io.github.ansonliao`.
+* **Selenium 4 W3C semantics.** `TextInput.getText()` now reads the element's DOM
+  `value` *property* (`getDomProperty`) instead of the `value` *attribute*. This is
+  the correct W3C behaviour and is normally what you want, but review any code that
+  relied on the old attribute-based value.
+* **Using the snapshot.** `2.0.0-SNAPSHOT` is not published to Maven Central. Build
+  and install it locally with `./gradlew publishToMavenLocal`, then depend on
+  `io.github.ansonliao:htmlelements-java:2.0.0-SNAPSHOT`.
+* **Requirements.** JDK 21 and Selenium 4.x at runtime.
+* **Serenity BDD.** The `htmlelements-thucydides` module now integrates
+  [Serenity BDD](https://serenity-bdd.info/) 5.x (the project formerly known as
+  Thucydides).
 
 Create blocks of elements
 -------------------------
